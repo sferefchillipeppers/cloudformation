@@ -1,0 +1,72 @@
+AWS::EC2::Instance
+The AWS::EC2::Instance resource creates an EC2 instance.
+If an Elastic IP address is attached to your instance, AWS CloudFormation reattaches the Elastic
+IP address after it updates the instance.
+#YAML SINTAX
+#Type: "AWS::EC2::Instance"
+#Properties:
+# Affinity (p. 579): String                                required -> NO
+# AvailabilityZone (p. 579): String                        required -> YES 
+# BlockDeviceMappings (p. 579):
+#   - EC2 Block Device Mapping
+#       DeviceName (p. 1072): String
+#       Ebs (p. 1072):
+#         EC2 EBS Block Device
+#       NoDevice (p. 1072): {}
+#       VirtualName (p. 1072): String
+# DisableApiTermination (p. 580): Boolean
+# EbsOptimized (p. 580): Boolean
+# HostId (p. 580): String
+# IamInstanceProfile (p. 580): String
+# ImageId (p. 580): String
+# InstanceInitiatedShutdownBehavior (p. 581): String
+# InstanceType (p. 581): String
+# KernelId (p. 581): String
+# KeyName (p. 581): String
+# Monitoring (p. 581): Boolean
+# NetworkInterfaces (p. 581):
+# - EC2 Network Interface"
+# PlacementGroupName (p. 582): String
+# PrivateIpAddress (p. 582): String
+# RamdiskId (p. 582): String
+# SecurityGroupIds (p. 582): A list that contains the security group ID for VPC
+# - String
+# SecurityGroups (p. 583): Valid only for Amazon EC2 security group.
+# - String
+# SourceDestCheck (p. 583): Boolean
+# SsmAssociations (p. 583):
+# - SSMAssociation
+# SubnetId (p. 583): String Specify the ID of the subnet that you want to launch the instance
+# Tags (p. 583):
+# - Resource Tag
+# Tenancy (p. 583): String default, dedicated or host
+# UserData (p. 584): String
+# Volumes (p. 584):
+# - EC2 MountPoint
+# AdditionalInfo (p. 584): String
+
+required -> NO
+
+Resources: 
+  ec2-instance:
+      Type: AWS::EC2::Instance
+      Properties:
+        SecurityGroups:
+        - Ref: InstanceSecurityGroup #InstanceSecurityGroup es otro recurso de defino abajo.
+        - MyExistingSecurityGroup
+        KeyName: ''
+        ImageId: ami-0102022
+        SubnetId: ''
+        InstanceType: ''
+        Tags: ''
+  InstanceSecurityGroup:
+        Type: AWS::EC2::SecurityGroup
+        Properties:
+          GroupDescription: Enable SSH access via Port 22
+          SecurityGroupIngress:
+          - IpProtocol: tcp
+            FromPort: '22'
+            ToPort: '22'
+            CidrIp: 0.0.0.0/0
+
+
