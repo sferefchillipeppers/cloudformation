@@ -1,0 +1,31 @@
+AWS::S3::Bucket
+The AWS::S3::Bucket type creates an Amazon S3 bucket.
+
+You can set a deletion policy for your bucket to control how AWS CloudFormation handles the bucket when the stack is deleted. For Amazon S3 buckets, you can choose to retain the bucket or to delete the bucket. 
+
+Type: "AWS::S3::Bucket"
+Properties:
+	AccessControl (p. 924): String
+	BucketName (p. 924): String
+	CorsConfiguration (p. 925):
+		CORS Configuration
+	LifecycleConfiguration (p. 925):
+		Lifecycle Configuration
+
+	LoggingConfiguration (p. 925):
+		Logging Configuration
+
+	NotificationConfiguration (p. 925):
+		Notification Configuration
+
+	ReplicationConfiguration (p. 925):
+		Replication Configuration
+
+	Tags (p. 925):
+		- Resource Tag
+
+	VersioningConfiguration (p. 926):
+		Versioning Configuration
+
+	WebsiteConfiguration (p. 926):
+		Website Configuration Type
