@@ -5,10 +5,10 @@ You can set a deletion policy for your bucket to control how AWS CloudFormation 
 
 Type: "AWS::S3::Bucket"
 Properties:
-	AccessControl (p. 924): String
-	BucketName (p. 924): String
-	CorsConfiguration (p. 925):
-		CORS Configuration
+  AccessControl (p. 924): String
+  BucketName (p. 924): String
+  CorsConfiguration (p. 925):
+  	CORS Configuration
 	LifecycleConfiguration (p. 925):
 		Lifecycle Configuration
 
@@ -29,3 +29,32 @@ Properties:
 
 	WebsiteConfiguration (p. 926):
 		Website Configuration Type
+
+
+AWS::S3::BucketPolicy
+The AWS::S3::BucketPolicy type applies an Amazon S3 bucket policy to an Amazon S3 bucket.
+
+  Type: "AWS::S3::BucketPolicy"
+    Properties:
+      Bucket (p. 938): String
+        -Ref: "MyExampleBucket"
+      PolicyDocument (p. 939): JSON
+        Statement:
+          -
+            Action:
+                - "s3:GetObject"
+            Effect: "Allow"
+            Resource:
+                Fn::Join:
+                    - ""
+                    -
+                      - "arn:aws:s3:::"
+                      -
+                        Ref: "MyExampleBucket"
+                      - "/*"
+            Principal: "*"
+            Condition:
+                StringLike:
+                    aws:Referer:
+                        - "http://www.example.com/*"
+                        - "http://example.com/*"
